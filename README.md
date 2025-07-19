@@ -11,8 +11,8 @@ This repository contains a collection of independent Python terminal application
 
 📂 Project Structure:
 This project is structured with individual folders for each task. Here's a typical layout (note: folder names might vary slightly on your system, e.g., 2° TASK for the Bookstore App):
-
-YourProjectRoot/
+'''
+ProjectRoot/
 ├── README.md               # This file
 ├── utils.py                # Common utility functions (e.g., input validation, colors)
 |
@@ -30,6 +30,7 @@ YourProjectRoot/
     ├── main.py             # Main script for the Budget App
     ├── transaction.py
     └── budget_tracker.py
+'''
 🚀 How to Run Each Application:
 Since these applications are currently standalone, you'll need to navigate into their respective directories to run them.
 
