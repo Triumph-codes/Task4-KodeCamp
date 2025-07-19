@@ -36,7 +36,7 @@ def main():
 
         if choice == '1': # Add New Book
             print(f"\n{Fore.CYAN}═══ Add New Book ═══{Style.RESET_ALL}")
-            title = get_valid_input("Enter book title:", validator=Book._validate_string_input)
+            title = get_valid_input("Enter book title:", validator=lambda x: Book._validate_string_input(x, "Title"))
             if title is None: continue
             # Note: We pass a dummy field name "Author" to the validator since it's a general string validator.
             author = get_valid_input("Enter author's name:", validator=lambda x: Book._validate_string_input(x, "Author"))
