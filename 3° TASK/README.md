@@ -18,5 +18,5 @@ This application is designed to be run via the main unified menu system from the
 3.  Select the "Bookstore Inventory System" option from the main menu.
 
 Alternatively, for standalone testing (not recommended for daily use in the unified project):
-1.  Navigate into the `bookstore_app/` directory.
+1.  Navigate into the `personal budget/` directory.
 2.  Run `python main.py`.
