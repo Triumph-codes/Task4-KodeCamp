@@ -36,3 +36,14 @@ def get_valid_input(prompt, validator=None, max_attempts=3):
             # Handle Ctrl+C gracefully
             print(f"\n{Fore.YELLOW}Operation cancelled by user (Ctrl+C).{Style.RESET_ALL}")
             return None # Indicate cancellation
+
+def confirm_action(prompt):
+    """Asks the user for confirmation (yes/no)."""
+    while True:
+        response = input(f"{Fore.YELLOW}{prompt} (yes/no): {Style.RESET_ALL}").lower().strip()
+        if response in ['y', 'yes']:
+            return True
+        elif response in ['n', 'no']:
+            return False
+        else:
+            print(f"{Fore.RED}Invalid input. Please type 'yes' or 'no'.{Style.RESET_ALL}")
