@@ -2,8 +2,9 @@
 
 import json
 import os
+import math
 from pathlib import Path
-from book import Book # Import the Book class
+from apps.bookstore_app.book import Book # Import the Book class
 from colorama import Fore, Style
 
 DATA_FILE = 'books.json' # File to store book inventory

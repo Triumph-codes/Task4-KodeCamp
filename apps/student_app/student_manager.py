@@ -3,8 +3,9 @@
 import json
 import os
 from pathlib import Path
-from student import Student # Import the Student class
+from apps.student_app.student import Student # Import the Student class
 from colorama import Fore, Style # For print statements
+
 
 DATA_FILE = 'students.json'
 

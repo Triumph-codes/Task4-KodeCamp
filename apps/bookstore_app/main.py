@@ -1,8 +1,19 @@
 # main.py
+import sys
+from os.path import dirname, join, abspath
 
-from utils import setup_app_colors, get_valid_input
-from book import Book # To access static validation methods if needed for input prompts
-from inventory import InventoryManager
+# Add project root to Python path
+project_root = abspath(join(dirname(dirname(dirname(__file__)))))
+sys.path.insert(0, project_root)
+
+try:
+    from shared.utils import setup_app_colors, get_valid_input
+    from apps.bookstore_app.book import Book
+    from apps.bookstore_app.inventory import InventoryManager
+except ImportError as e:
+    print(f"Import Error: {e}")
+    raise
+
 from colorama import Fore, Style
 
 def display_main_menu():
@@ -17,10 +28,10 @@ def display_main_menu():
     print(f"{Fore.BLUE}5.{Style.RESET_ALL} Delete Book (Future Feature)")
     print(f"{Fore.BLUE}6.{Style.RESET_ALL} Save Inventory")
     print(f"{Fore.BLUE}7.{Style.RESET_ALL} Load Inventory")
-    print(f"{Fore.BLUE}8.{Style.RESET_ALL} Exit Application")
+    print(f"{Fore.BLUE}8.{Style.RESET_ALL} Back to Main Menu")
     print(f"{Fore.CYAN}═══════════════════════════════════════════════════════{Style.RESET_ALL}")
 
-def main():
+def run_bookstore_app():
     setup_app_colors() # Initialize colorama
     manager = InventoryManager() # Automatically loads data on init
 
@@ -89,5 +100,3 @@ def main():
             else:
                 print(f"{Fore.BLUE}Exit cancelled. Returning to main menu.{Style.RESET_ALL}")
 
-if __name__ == "__main__":
-    main()

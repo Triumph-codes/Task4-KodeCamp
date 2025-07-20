@@ -1,6 +1,8 @@
 # student.py
 
 from colorama import Fore, Style # Only for __str__ method's display
+print(f"{Fore.GREEN}DEBUG: student_app/student.py loaded. __name__='{__name__}', __package__='{__package__}'{Style.RESET_ALL}")
+
 
 class Student:
     VALID_GRADES = {
