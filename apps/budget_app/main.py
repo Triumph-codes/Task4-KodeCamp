@@ -1,8 +1,20 @@
 # main.py (for Personal Budget Tracker)
+# budget_app/main.py
+import sys
+from os.path import dirname, join, abspath
 
-from utils import setup_app_colors, get_valid_input
-from transaction import Transaction # To access VALID_CATEGORIES and static validation methods
-from budget_tracker import BudgetTracker
+# 1. Add project root to Python path
+project_root = abspath(join(dirname(dirname(dirname(__file__)))))
+sys.path.insert(0, project_root)
+
+# 2. Import shared utilities first
+from shared.utils import setup_app_colors, get_valid_input
+
+# 3. Import from within budget_app using absolute paths
+from apps.budget_app.transaction import Transaction
+from apps.budget_app.budget_tracker import BudgetTracker
+
+# 4. Other imports
 from colorama import Fore, Style
 
 def display_main_menu():
@@ -16,7 +28,7 @@ def display_main_menu():
     print(f"{Fore.BLUE}4.{Style.RESET_ALL} Calculate Total Expenses")
     print(f"{Fore.BLUE}5.{Style.RESET_ALL} Save Transactions")
     print(f"{Fore.BLUE}6.{Style.RESET_ALL} Load Transactions")
-    print(f"{Fore.BLUE}7.{Style.RESET_ALL} Exit Application")
+    print(f"{Fore.BLUE}7.{Style.RESET_ALL} Back to Main Menu")
     print(f"{Fore.CYAN}═══════════════════════════════════════════════════════{Style.RESET_ALL}")
 
 def get_transaction_details():
@@ -43,7 +55,7 @@ def get_transaction_details():
         'amount': amount
     }
 
-def main():
+def run_budget_app():
     setup_app_colors() # Initialize colorama
     manager = BudgetTracker() # Automatically loads data on init
 
@@ -90,18 +102,11 @@ def main():
             
             manager.load_data() # This will reassign manager.transactions internally
         
-        elif choice == '7': # Exit Application
-            confirm_exit = get_valid_input(
-                f"{Fore.YELLOW}Exit without saving current changes? (yes/no):{Style.RESET_ALL} ",
-                validator=lambda x: x.lower() if x.lower() in ['yes', 'no'] else (_ for _ in ()).throw(ValueError("Invalid input. Please enter 'yes' or 'no'.")))
-            if confirm_exit == 'yes':
-                print(f"{Fore.GREEN}Goodbye from Budget Tracker! 💸{Style.RESET_ALL}")
-                break
-            elif confirm_exit is None: # User cancelled exit, stay in app
-                print(f"{Fore.BLUE}Exit cancelled.{Style.RESET_ALL}")
-                continue
-            else:
-                print(f"{Fore.BLUE}Exit cancelled. Returning to main menu.{Style.RESET_ALL}")
+        elif choice == '7': # Back to Main Menu
+            print(f"{Fore.BLUE}Returning to main application menu.{Style.RESET_ALL}")
+            break
 
 if __name__ == "__main__":
-    main()
+    print("Budget App Imports Working!")
+    print(f"Utils imported from: {setup_app_colors.__module__}")
+    print(f"Transaction imported from: {Transaction.__module__}")

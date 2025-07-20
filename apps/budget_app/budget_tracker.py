@@ -3,7 +3,7 @@
 import json
 import os
 from pathlib import Path
-from transaction import Transaction # Import the Transaction class
+from apps.budget_app.transaction import Transaction # Import the Transaction class
 from colorama import Fore, Style
 from collections import defaultdict # Useful for grouping
 
