@@ -22,12 +22,11 @@ def display_main_menu():
     print(f"{Fore.CYAN}═══════════════════════════════════════════════════════{Style.RESET_ALL}")
     print(f"{Fore.BLUE}1.{Style.RESET_ALL} Add New Student")
     print(f"{Fore.BLUE}2.{Style.RESET_ALL} View All Students")
-    print(f"{Fore.BLUE}3.{Style.RESET_ALL} Search Student by Name (New Feature)") 
-    # Update/Delete features will be added in future commits
+    print(f"{Fore.BLUE}3.{Style.RESET_ALL} Search Student by Name") 
     print(f"{Fore.BLUE}4.{Style.RESET_ALL} Save Student Data")
     print(f"{Fore.BLUE}5.{Style.RESET_ALL} Load Student Data")
-    print(f"{Fore.BLUE}6.{Style.RESET_ALL} Update Student Details (Future Feature)") # Placeholder
-    print(f"{Fore.BLUE}7.{Style.RESET_ALL} Delete Student (Future Feature)")   # Placeholder
+    print(f"{Fore.BLUE}6.{Style.RESET_ALL} Update Student Details (New Feature)")
+    print(f"{Fore.BLUE}7.{Style.RESET_ALL} Delete Student (New Feature)") 
     print(f"{Fore.BLUE}8.{Style.RESET_ALL} Back to Main Menu") # Option to return to top-level menu
     print(f"{Fore.CYAN}═══════════════════════════════════════════════════════{Style.RESET_ALL}")
 

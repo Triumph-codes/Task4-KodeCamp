@@ -36,21 +36,28 @@ def get_transaction_details():
     print(f"\n{Fore.CYAN}--- Enter New Transaction Details ---{Style.RESET_ALL}")
     
     # Get Date
-    date_str = get_valid_input("Enter date (YYYY-MM-DD, e.g., 2023-10-27):", validator=Transaction._validate_date)
-    if date_str is None: return None # User cancelled
+    date_obj = get_valid_input("Enter date (YYYY-MM-DD, e.g., 2023-10-27):", 
+                                validator=Transaction._validate_date,
+                                error_message=f"{Fore.RED}Invalid date format or future date. Please use YYYY-MM-DD.{Style.RESET_ALL}")
+    if date_obj is None: return None # User cancelled
+    date_str = date_obj.strftime("%Y-%m-%d")
 
     # Get Category
     print(f"Available categories: {Fore.BLUE}{', '.join(Transaction.VALID_CATEGORIES)}{Style.RESET_ALL}")
-    category = get_valid_input("Enter category:", validator=Transaction._validate_category)
+    category = get_valid_input("Enter category:", 
+                               validator=Transaction._validate_category, 
+                               error_message=f"{Fore.RED}Invalid category. Choose from the list.{Style.RESET_ALL}")
     if category is None: return None # User cancelled
 
     # Get Amount
-    amount = get_valid_input("Enter amount (e.g., 50.75):", validator=Transaction._validate_amount)
+    amount = get_valid_input("Enter amount (e.g., 50.75):", 
+                             type_func=float, # Specify type_func as float
+                             validator=Transaction._validate_amount,
+                             error_message=f"{Fore.RED}Amount must be a positive number.{Style.RESET_ALL}")
     if amount is None: return None # User cancelled
 
-    # Convert date object back to string for passing to add_transaction
     return {
-        'date': date_str.strftime("%Y-%m-%d"), # Keep as string for add_transaction, it re-validates
+        'date': date_str,
         'category': category,
         'amount': amount
     }
@@ -64,7 +71,8 @@ def run_budget_app():
         
         choice = get_valid_input("Enter your choice (1-7):", 
                                  validator=lambda x: x if x in ['1','2','3','4','5','6','7'] 
-                                 else (_ for _ in ()).throw(ValueError("Invalid choice. Please enter a number between 1 and 7.")))
+                                 else (_ for _ in ()).throw(ValueError("Invalid choice. Please enter a number between 1 and 7.")),
+                                 error_message=f"{Fore.RED}Invalid choice. Please enter a number between 1 and 7.{Style.RESET_ALL}") # Added error_message for consistency
         
         if choice is None: # User cancelled menu input
             continue 
@@ -85,7 +93,7 @@ def run_budget_app():
         elif choice == '3': # View Transactions by Category
             manager.get_transactions_by_category()
 
-        elif choice == '4': # Calculate Total Expenses
+        elif choice == '4': # Calculate Total Expenses or Financial Summary
             manager.calculate_total_expenses()
 
         elif choice == '5': # Save Transactions
@@ -105,8 +113,4 @@ def run_budget_app():
         elif choice == '7': # Back to Main Menu
             print(f"{Fore.BLUE}Returning to main application menu.{Style.RESET_ALL}")
             break
-
-if __name__ == "__main__":
-    print("Budget App Imports Working!")
-    print(f"Utils imported from: {setup_app_colors.__module__}")
-    print(f"Transaction imported from: {Transaction.__module__}")
+        
